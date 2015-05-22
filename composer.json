@@ -1,5 +1,5 @@
 {
-    "name": "detailnet/blitline",
+    "name": "detailnet/lw-inside-client",
     "description": "API client for Louis Widmer Inside",
     "type": "library",
     "keywords": [
