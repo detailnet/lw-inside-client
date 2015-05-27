@@ -29,6 +29,13 @@ $params['filter'] = array(
     ),
 );
 
+$params['sort'] = array(
+    array(
+        'property' => 'created_on',
+        'direction' => 'desc',
+    ),
+);
+
 $client = InsideClient::factory($config);
 
 $response = $client->listAssets($params);

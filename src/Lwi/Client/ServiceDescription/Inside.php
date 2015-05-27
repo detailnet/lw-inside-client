@@ -30,7 +30,7 @@ return array(
                     '$ref' => 'FilterParam',
                 ),
                 'sort' => array(
-                    '$ref' => 'FilterParam',
+                    '$ref' => 'SortParam',
                 ),
             ),
             'responseClass' => 'Lwi\Client\Response\AssetList',
