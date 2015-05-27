@@ -9,16 +9,10 @@ return array(
             'summary'          => 'List assets',
             'parameters'       => array(
                 'page' => array(
-                    'description' => 'The number of the page',
-                    'location'    => 'query',
-                    'type'        => 'integer',
-                    'required'    => false,
+                    '$ref' => 'PageParam',
                 ),
                 'page_size' => array(
-                    'description' => 'The number of items to list on a page',
-                    'location'    => 'query',
-                    'type'        => 'integer',
-                    'required'    => false,
+                    '$ref' => 'PageSizeParam',
                 ),
                 'query' => array(
                     'description' => 'Full text search query (currently searches only in asset name)',
@@ -41,7 +35,7 @@ return array(
             'summary'          => 'Fetch an asset',
             'parameters'       => array(
                 'asset_id' => array(
-                    'description' => 'The ID of the asset you wish to fetch',
+                    'description' => 'The ID of the asset to fetch',
                     'location'    => 'uri',
                     'type'        => 'string',
                     'required'    => true,
@@ -51,6 +45,18 @@ return array(
         ),
     ),
     'models' => array(
+        'PageParam' => array(
+            'description' => 'The number of the page',
+            'location'    => 'query',
+            'type'        => 'integer',
+            'required'    => false,
+        ),
+        'PageSizeParam' => array(
+            'description' => 'The number of items to list on a page',
+            'location'    => 'query',
+            'type'        => 'integer',
+            'required'    => false,
+        ),
         'Filter' => array(
             'type' => 'object',
             'properties' => array(
