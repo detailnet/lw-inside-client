@@ -2,10 +2,15 @@
 
 namespace Lwi\Client;
 
-use Guzzle\Common\Collection;
-use Guzzle\Service\Client;
-use Guzzle\Service\Description\ServiceDescription;
-use Guzzle\Service\Resource\Model;
+//use Guzzle\Common\Collection;
+//use Guzzle\Service\Client;
+//use Guzzle\Service\Description\ServiceDescription;
+//use Guzzle\Service\Resource\Model;
+
+use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\Collection;
+use GuzzleHttp\Command\Guzzle\Description as ServiceDescription;
+use GuzzleHttp\Command\Guzzle\GuzzleClient as ServiceClient;
 
 //use Lwi\Client\Exception;
 use Lwi\Client\Subscriber;
@@ -13,19 +18,19 @@ use Lwi\Client\Subscriber;
 /**
  * Louis Widmer Inside API client.
  *
- * @method Model listAssets(array $params = array())
- * @method Model fetchAsset(array $params = array())
- * @method Model listAssetTypes(array $params = array())
- * @method Model fetchAssetType(array $params = array())
+ * @method array listAssets(array $params = array())
+ * @method array fetchAsset(array $params = array())
+ * @method array listAssetTypes(array $params = array())
+ * @method array fetchAssetType(array $params = array())
  */
-class InsideClient extends Client
+class InsideClient extends ServiceClient
 {
     const CLIENT_VERSION = '0.1.0';
 
     public static function factory($options = array())
     {
         $defaultOptions = array(
-            'base_url' => 'https://lw-inside.detailnet.ch/api',
+            'base_url' => 'https://lw-inside.detailnet.ch/api/',
             'request.options' => array(
                 // Float describing the number of seconds to wait while trying to connect to a server.
                 // 0 was the default (wait indefinitely).
@@ -50,6 +55,7 @@ class InsideClient extends Client
 
         $headers = array(
             'Accept' => 'application/json',
+            'User-Agent' => 'lw-inside-client/' . self::CLIENT_VERSION,
         );
 
         if (isset($options['app_id'])) {
@@ -60,30 +66,27 @@ class InsideClient extends Client
             $headers['App-Key'] = $options['app_key'];
         }
 
-        $client = new self($config->get('base_url'), $config);
-//        $client->setDefaultOption(
-//            'query',
-//            array(
-//                'application_id' => $config['application_id'],
-//            )
-//        );
-        $client->setDefaultOption('headers', $headers);
-        $client->setDescription(
-            ServiceDescription::factory(__DIR__ . '/ServiceDescription/Inside.php')
-        );
-        $client->setUserAgent('lw-inside-client/' . self::CLIENT_VERSION, true);
+        $httpClient = new HttpClient($config->toArray());
+        $httpClient->setDefaultOption('headers', $headers);
 
-        $client->getEventDispatcher()->addSubscriber(new Subscriber\ErrorHandlerSubscriber());
-        $client->getEventDispatcher()->addSubscriber(new Subscriber\RequestOptionsSubscriber());
+        $description = new ServiceDescription(
+            require __DIR__ . '/ServiceDescription/Inside.php'
+        );
+
+        $client = new self($httpClient, $description);
+//        $client->getEmitter()->attach()
+//
+//        $client->getEventDispatcher()->addSubscriber(new Subscriber\ErrorHandlerSubscriber());
+//        $client->getEventDispatcher()->addSubscriber(new Subscriber\RequestOptionsSubscriber());
 
         return $client;
     }
 
-    /**
-     * @return \Guzzle\Http\Message\RequestFactoryInterface
-     */
-    public function getRequestFactory()
-    {
-        return $this->requestFactory;
-    }
+//    /**
+//     * @return \Guzzle\Http\Message\RequestFactoryInterface
+//     */
+//    public function getRequestFactory()
+//    {
+//        return $this->requestFactory;
+//    }
 }

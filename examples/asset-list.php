@@ -40,4 +40,4 @@ $client = InsideClient::factory($config);
 
 $response = $client->listAssets($params);
 
-echo $response;
+var_dump($response);

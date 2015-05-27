@@ -14,4 +14,4 @@ $client = InsideClient::factory($config);
 
 $response = $client->fetchAsset(array('asset_id' => $assetId));
 
-echo $response;
+var_dump($response);

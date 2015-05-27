@@ -4,8 +4,6 @@ namespace LwiTest\Client;
 
 use PHPUnit_Framework_TestCase as TestCase;
 
-//use Guzzle\Service\Description\ServiceDescription;
-
 use Lwi\Client\InsideClient;
 
 class InsideClientTest extends TestCase
@@ -31,9 +29,8 @@ class InsideClientTest extends TestCase
         $client = InsideClient::factory($config);
 
         $this->assertInstanceOf('Lwi\Client\InsideClient', $client);
-//        $this->assertEquals($config['application_id'], $client->getDefaultOption('query')['application_id']);
-        $this->assertEquals('application/json', $client->getDefaultOption('headers')['Accept']);
-        $this->assertEquals('https://lw-inside.detailnet.ch/api', $client->getConfig('base_url'));
+        $this->assertEquals('application/json', $client->getHttpClient()->getDefaultOption('headers')['Accept']);
+        $this->assertEquals('https://lw-inside.detailnet.ch/api/', $client->getHttpClient()->getBaseUrl());
     }
 
 //    /**
@@ -64,8 +61,8 @@ class InsideClientTest extends TestCase
     {
         $client = InsideClient::factory($config);
 
-        $this->assertInstanceOf('Guzzle\Service\Command\OperationCommand', $client->getCommand('listAssets'));
-        $this->assertInstanceOf('Guzzle\Service\Command\OperationCommand', $client->getCommand('fetchAsset'));
-        $this->assertInstanceOf('Guzzle\Service\Command\OperationCommand', $client->getCommand('listAssetTypes'));
+        $this->assertInstanceOf('GuzzleHttp\Command\Command', $client->getCommand('listAssets'));
+        $this->assertInstanceOf('GuzzleHttp\Command\Command', $client->getCommand('fetchAsset'));
+        $this->assertInstanceOf('GuzzleHttp\Command\Command', $client->getCommand('listAssetTypes'));
     }
 }
