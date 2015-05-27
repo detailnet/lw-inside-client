@@ -65,15 +65,7 @@ class InsideClientTest extends TestCase
         $client = InsideClient::factory($config);
 
         $this->assertInstanceOf('Guzzle\Service\Command\OperationCommand', $client->getCommand('listAssets'));
-        $this->assertEquals(
-            'Lwi\Client\Response\AssetList',
-            $client->getCommand('listAssets')->getOperation()->getResponseClass()
-        );
-
         $this->assertInstanceOf('Guzzle\Service\Command\OperationCommand', $client->getCommand('fetchAsset'));
-        $this->assertEquals(
-            'Lwi\Client\Response\Asset',
-            $client->getCommand('fetchAsset')->getOperation()->getResponseClass()
-        );
+        $this->assertInstanceOf('Guzzle\Service\Command\OperationCommand', $client->getCommand('listAssetTypes'));
     }
 }
