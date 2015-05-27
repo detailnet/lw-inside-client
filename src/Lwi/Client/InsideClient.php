@@ -15,6 +15,8 @@ use Lwi\Client\Subscriber;
  *
  * @method Model listAssets(array $params = array())
  * @method Model fetchAsset(array $params = array())
+ * @method Model listAssetTypes(array $params = array())
+ * @method Model fetchAssetType(array $params = array())
  */
 class InsideClient extends Client
 {

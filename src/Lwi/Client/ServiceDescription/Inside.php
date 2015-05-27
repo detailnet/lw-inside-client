@@ -43,6 +43,40 @@ return array(
             ),
             'responseClass' => 'Asset',
         ),
+        'listAssetTypes' => array(
+            'httpMethod'       => 'GET',
+            'uri'              => 'asset-types',
+            'summary'          => 'List asset-types',
+            'parameters'       => array(
+                'page' => array(
+                    '$ref' => 'PageParam',
+                ),
+                'page_size' => array(
+                    '$ref' => 'PageSizeParam',
+                ),
+                'filter' => array(
+                    '$ref' => 'FilterParam',
+                ),
+                'sort' => array(
+                    '$ref' => 'SortParam',
+                ),
+            ),
+            'responseClass' => 'ListAssetTypesResponse',
+        ),
+//        'fetchAssetType' => array(
+//            'httpMethod'       => 'GET',
+//            'uri'              => 'asset-types/{asset_type_id}',
+//            'summary'          => 'Fetch an asset-type',
+//            'parameters'       => array(
+//                'asset_type_id' => array(
+//                    'description' => 'The ID of the asset-type to fetch',
+//                    'location'    => 'uri',
+//                    'type'        => 'string',
+//                    'required'    => true,
+//                ),
+//            ),
+//            'responseClass' => 'AssetType',
+//        ),
     ),
     'models' => array(
         'PageParam' => array(
@@ -135,6 +169,30 @@ return array(
                     'type'        => 'array',
                     'items'       => array(
                         '$ref' => 'Asset',
+                    ),
+                ),
+            ),
+        ),
+        'AssetType' => array(
+            'type' => 'object',
+            'properties' => array(
+                'id' => array(
+                    'description' => 'The asset-type\'s unique ID',
+                    'location'    => 'json',
+                    'type'        => 'string',
+                ),
+                /** @todo Define other properties */
+            ),
+        ),
+        'ListAssetTypesResponse' => array(
+            'type' => 'object',
+            'properties' => array(
+                'asset_types' => array(
+                    'description' => 'The resulting asset-types',
+                    'location'    => 'json',
+                    'type'        => 'array',
+                    'items'       => array(
+                        '$ref' => 'AssetType',
                     ),
                 ),
             ),
