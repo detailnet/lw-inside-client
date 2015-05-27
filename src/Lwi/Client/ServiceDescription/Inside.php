@@ -27,7 +27,7 @@ return array(
                     '$ref' => 'SortParam',
                 ),
             ),
-            'responseClass' => 'Lwi\Client\Response\AssetList',
+            'responseClass' => 'ListAssetsResponse',
         ),
         'fetchAsset' => array(
             'httpMethod'       => 'GET',
@@ -41,7 +41,7 @@ return array(
                     'required'    => true,
                 ),
             ),
-            'responseClass' => 'Lwi\Client\Response\Asset',
+            'responseClass' => 'Asset',
         ),
     ),
     'models' => array(
@@ -113,6 +113,30 @@ return array(
             'required'    => false,
             'items'       => array(
                 '$ref' => 'Sort',
+            ),
+        ),
+        'Asset' => array(
+            'type' => 'object',
+            'properties' => array(
+                'id' => array(
+                    'description' => 'The asset\'s unique ID',
+                    'location'    => 'json',
+                    'type'        => 'string',
+                ),
+                /** @todo Define other properties */
+            ),
+        ),
+        'ListAssetsResponse' => array(
+            'type' => 'object',
+            'properties' => array(
+                'assets' => array(
+                    'description' => 'The resulting assets',
+                    'location'    => 'json',
+                    'type'        => 'array',
+                    'items'       => array(
+                        '$ref' => 'Asset',
+                    ),
+                ),
             ),
         ),
     ),

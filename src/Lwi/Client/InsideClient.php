@@ -5,16 +5,16 @@ namespace Lwi\Client;
 use Guzzle\Common\Collection;
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
+use Guzzle\Service\Resource\Model;
 
 //use Lwi\Client\Exception;
 use Lwi\Client\Subscriber;
-use Lwi\Client\Response;
 
 /**
  * Louis Widmer Inside API client.
  *
- * @method Response\AssetList listAssets(array $params = array())
- * @method Response\Asset fetchAsset(array $params = array())
+ * @method Model listAssets(array $params = array())
+ * @method Model fetchAsset(array $params = array())
  */
 class InsideClient extends Client
 {
