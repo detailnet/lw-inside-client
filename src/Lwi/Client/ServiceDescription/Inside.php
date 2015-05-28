@@ -149,15 +149,26 @@ return array(
                 '$ref' => 'Sort',
             ),
         ),
+        'PageSizeProperty' => array(
+            'description' => 'The page size',
+            'location'    => 'json',
+            'type'        => 'integer',
+        ),
+        'PageCountProperty' => array(
+            'description' => 'The total number of pages',
+            'location'    => 'json',
+            'type'        => 'integer',
+        ),
+        'TotalItemsProperty' => array(
+            'description' => 'The total number of items',
+            'location'    => 'json',
+            'type'        => 'integer',
+        ),
         'Asset' => array(
             'type' => 'object',
-            'properties' => array(
-                'id' => array(
-                    'description' => 'The asset\'s unique ID',
-                    'location'    => 'json',
-                    'type'        => 'string',
-                ),
-                /** @todo Define other properties */
+            // Keep properties dynamic
+            'additionalProperties' => array(
+                'location' => 'json',
             ),
         ),
         'ListAssetsResponse' => array(
@@ -171,17 +182,22 @@ return array(
                         '$ref' => 'Asset',
                     ),
                 ),
+                'page_size' => array(
+                    '$ref' => 'PageSizeProperty',
+                ),
+                'page_count' => array(
+                    '$ref' => 'PageCountProperty',
+                ),
+                'total_items' => array(
+                    '$ref' => 'TotalItemsProperty',
+                ),
             ),
         ),
         'AssetType' => array(
             'type' => 'object',
-            'properties' => array(
-                'id' => array(
-                    'description' => 'The asset-type\'s unique ID',
-                    'location'    => 'json',
-                    'type'        => 'string',
-                ),
-                /** @todo Define other properties */
+            // Keep properties dynamic
+            'additionalProperties' => array(
+                'location' => 'json',
             ),
         ),
         'ListAssetTypesResponse' => array(
@@ -194,6 +210,15 @@ return array(
                     'items'       => array(
                         '$ref' => 'AssetType',
                     ),
+                ),
+                'page_size' => array(
+                    '$ref' => 'PageSizeProperty',
+                ),
+                'page_count' => array(
+                    '$ref' => 'PageCountProperty',
+                ),
+                'total_items' => array(
+                    '$ref' => 'TotalItemsProperty',
                 ),
             ),
         ),

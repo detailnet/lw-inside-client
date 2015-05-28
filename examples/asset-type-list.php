@@ -9,4 +9,4 @@ $client = InsideClient::factory($config);
 
 $response = $client->listAssetTypes($params);
 
-echo $response;
+var_dump($response);
