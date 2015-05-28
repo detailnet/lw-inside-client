@@ -2,11 +2,6 @@
 
 namespace Lwi\Client;
 
-//use Guzzle\Common\Collection;
-//use Guzzle\Service\Client;
-//use Guzzle\Service\Description\ServiceDescription;
-//use Guzzle\Service\Resource\Model;
-
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Collection;
 use GuzzleHttp\Command\Guzzle\Description as ServiceDescription;
@@ -31,7 +26,10 @@ class InsideClient extends ServiceClient
     {
         $defaultOptions = array(
             'base_url' => 'https://lw-inside.detailnet.ch/api/',
-            'request.options' => array(
+            'defaults' => array(
+                // We're using our own error handler
+                // (this disabled the use of the internal HttpError subscriber)
+                'exceptions' => false,
                 // Float describing the number of seconds to wait while trying to connect to a server.
                 // 0 was the default (wait indefinitely).
                 'connect_timeout' => 10,
@@ -68,25 +66,14 @@ class InsideClient extends ServiceClient
 
         $httpClient = new HttpClient($config->toArray());
         $httpClient->setDefaultOption('headers', $headers);
+        $httpClient->getEmitter()->attach(new Subscriber\ErrorHandler());
 
         $description = new ServiceDescription(
             require __DIR__ . '/ServiceDescription/Inside.php'
         );
 
         $client = new self($httpClient, $description);
-//        $client->getEmitter()->attach()
-//
-//        $client->getEventDispatcher()->addSubscriber(new Subscriber\ErrorHandlerSubscriber());
-//        $client->getEventDispatcher()->addSubscriber(new Subscriber\RequestOptionsSubscriber());
 
         return $client;
     }
-
-//    /**
-//     * @return \Guzzle\Http\Message\RequestFactoryInterface
-//     */
-//    public function getRequestFactory()
-//    {
-//        return $this->requestFactory;
-//    }
 }
