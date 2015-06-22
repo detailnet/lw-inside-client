@@ -15,6 +15,18 @@ if (isset($_GET['page_size'])) {
     $params['page_size'] = (int) $_GET['page_size'];
 }
 
+// Example: &name=Auge
+if (isset($_GET['name'])) {
+    $params['filter'] = array(
+        array(
+            'property' => 'name',
+            'value' => '%' . $_GET['name'] . '%',
+            'operator' => 'like',
+            'type' => 'string',
+        ),
+    );
+}
+
 $params['sort'] = array(
     array(
         'property' => 'created_on',
