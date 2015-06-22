@@ -88,12 +88,6 @@ return array(
                 'page_size' => array(
                     '$ref' => 'PageSizeParam',
                 ),
-                'query' => array(
-                    'description' => 'Full text search query (currently searches only in product name)',
-                    'location'    => 'query',
-                    'type'        => 'string',
-                    'required'    => false,
-                ),
                 'filter' => array(
                     '$ref' => 'FilterParam',
                 ),
