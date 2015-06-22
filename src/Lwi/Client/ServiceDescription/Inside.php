@@ -77,6 +77,26 @@ return array(
 //            ),
 //            'responseClass' => 'AssetType',
 //        ),
+        'listProducts' => array(
+            'httpMethod'       => 'GET',
+            'uri'              => 'products',
+            'summary'          => 'List products',
+            'parameters'       => array(
+                'page' => array(
+                    '$ref' => 'PageParam',
+                ),
+                'page_size' => array(
+                    '$ref' => 'PageSizeParam',
+                ),
+                'filter' => array(
+                    '$ref' => 'FilterParam',
+                ),
+                'sort' => array(
+                    '$ref' => 'SortParam',
+                ),
+            ),
+            'responseClass' => 'ListProductsResponse',
+        ),
     ),
     'models' => array(
         'PageParam' => array(
@@ -209,6 +229,35 @@ return array(
                     'type'        => 'array',
                     'items'       => array(
                         '$ref' => 'AssetType',
+                    ),
+                ),
+                'page_size' => array(
+                    '$ref' => 'PageSizeProperty',
+                ),
+                'page_count' => array(
+                    '$ref' => 'PageCountProperty',
+                ),
+                'total_items' => array(
+                    '$ref' => 'TotalItemsProperty',
+                ),
+            ),
+        ),
+        'Product' => array(
+            'type' => 'object',
+            // Keep properties dynamic
+            'additionalProperties' => array(
+                'location' => 'json',
+            ),
+        ),
+        'ListProductsResponse' => array(
+            'type' => 'object',
+            'properties' => array(
+                'products' => array(
+                    'description' => 'The resulting products',
+                    'location'    => 'json',
+                    'type'        => 'array',
+                    'items'       => array(
+                        '$ref' => 'Product',
                     ),
                 ),
                 'page_size' => array(
