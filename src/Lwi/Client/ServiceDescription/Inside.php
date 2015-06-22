@@ -97,6 +97,32 @@ return array(
             ),
             'responseClass' => 'ListProductsResponse',
         ),
+        'listProductTexts' => array(
+            'httpMethod'       => 'GET',
+            'uri'              => 'products/{product_id}/texts',
+            'summary'          => 'List product texts',
+            'parameters'       => array(
+                'product_id' => array(
+                    'description' => 'The ID of the product from which to fetch the texts',
+                    'location'    => 'uri',
+                    'type'        => 'string',
+                    'required'    => true,
+                ),
+                'page' => array(
+                    '$ref' => 'PageParam',
+                ),
+                'page_size' => array(
+                    '$ref' => 'PageSizeParam',
+                ),
+                'filter' => array(
+                    '$ref' => 'FilterParam',
+                ),
+                'sort' => array(
+                    '$ref' => 'SortParam',
+                ),
+            ),
+            'responseClass' => 'ListProductTextsResponse',
+        ),
     ),
     'models' => array(
         'PageParam' => array(
@@ -258,6 +284,35 @@ return array(
                     'type'        => 'array',
                     'items'       => array(
                         '$ref' => 'Product',
+                    ),
+                ),
+                'page_size' => array(
+                    '$ref' => 'PageSizeProperty',
+                ),
+                'page_count' => array(
+                    '$ref' => 'PageCountProperty',
+                ),
+                'total_items' => array(
+                    '$ref' => 'TotalItemsProperty',
+                ),
+            ),
+        ),
+        'ProductText' => array(
+            'type' => 'object',
+            // Keep properties dynamic
+            'additionalProperties' => array(
+                'location' => 'json',
+            ),
+        ),
+        'ListProductTextsResponse' => array(
+            'type' => 'object',
+            'properties' => array(
+                'product_texts' => array(
+                    'description' => 'The resulting product texts',
+                    'location'    => 'json',
+                    'type'        => 'array',
+                    'items'       => array(
+                        '$ref' => 'ProductText',
                     ),
                 ),
                 'page_size' => array(
