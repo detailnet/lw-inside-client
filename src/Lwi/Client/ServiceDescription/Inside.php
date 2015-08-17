@@ -346,9 +346,24 @@ return array(
                 ),
             ),
         ),
-        'ProductText' => array(
+        'TextBlock' => array(
             'type' => 'object',
             // Keep properties dynamic
+            'additionalProperties' => array(
+                'location' => 'json',
+            ),
+        ),
+        'ProductText' => array(
+            'type' => 'object',
+            'properties' => array(
+                'block' => array(
+                    'type' => 'array',
+                    'items' => array(
+                        '$ref' => 'TextBlock',
+                    ),
+                ),
+            ),
+            // Keep (other) properties dynamic
             'additionalProperties' => array(
                 'location' => 'json',
             ),
